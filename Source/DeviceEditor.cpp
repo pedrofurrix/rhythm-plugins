@@ -107,16 +107,23 @@ DeviceEditor::DeviceEditor(GenericProcessor* parentNode,
     audioLabel->setColour(Label::textColourId, Colours::darkgrey);
     addAndMakeVisible(audioLabel);
 
-    for (int i = 0; i < 2; i++)
+    for (int i = 0; i <8; i++)
     {
         ElectrodeButton* button = new ElectrodeButton(-1);
         electrodeButtons.add(button);
-
-        button->setBounds(174+i*30, 35, 30, 15);
-        button->setChannelNum(-1);
-        button->setClickingTogglesState (false);
-        button->setToggleState(false, dontSendNotification);
-
+        int j=0;
+        if (i%2==0) {
+            button->setBounds(174, 35+j*15, 30, 15);
+            button->setChannelNum(-1);
+            button->setClickingTogglesState (false);
+            button->setToggleState(false, dontSendNotification);
+        } else {
+            button->setBounds(174+30, 35+j*15, 30, 15);
+            button->setChannelNum(-1);
+            button->setClickingTogglesState (false);
+            button->setToggleState(false, dontSendNotification);
+            j++;
+        }
         addAndMakeVisible(button);
         button->addListener(this);
 

@@ -42,8 +42,8 @@ using namespace Plugin;
 extern "C" EXPORT void getLibInfo(Plugin::LibraryInfo* info)
 {
 	info->apiVersion = PLUGIN_API_VER;
-	info->name = "Rhythm Plugins";
-	info->libVersion = "0.2.5";
+	info->name = "8C Analog OUT";
+	info->libVersion = "0.0.1";
 	info->numPlugins = NUM_PLUGINS;
 }
 
@@ -53,7 +53,7 @@ extern "C" EXPORT int getPluginInfo(int index, Plugin::PluginInfo* info)
 	{
 	case 0:
 		info->type = Plugin::Type::DATA_THREAD;
-		info->dataThread.name = "Acquisition Board";
+		info->dataThread.name = "8C Analog OUT";
 		info->dataThread.creator = &createDataThread<RhythmNode::AcquisitionBoard>;
 		break;
 	case 1:
