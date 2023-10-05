@@ -315,6 +315,7 @@ void DeviceEditor::buttonClicked(Button* button)
         }
         CoreServices::updateSignalChain(this);
     }
+    /*
     for (int j=0; j<8; j++){
 
         else if (button == electrodeButtons[0] || button == electrodeButtons[1]||button == electrodeButtons[2] || button == electrodeButtons[3] || button == electrodeButtons[4] || button == electrodeButtons[5] || button == electrodeButtons[6] || button == electrodeButtons[7])
@@ -326,10 +327,10 @@ void DeviceEditor::buttonClicked(Button* button)
             else
                 activeAudioChannel = RIGHT;
             */
-            
+    /*
             for (int i = 0; i < board->getNumDataOutputs(ContinuousChannel::ELECTRODE); i++)
             {
-                if (electrodeButtons[int(]->getChannelNum() -1 == i)
+                if (electrodeButtons[]->getChannelNum() -1 == i)
                     channelStates.push_back(true);
                 else
                     channelStates.push_back(false);
@@ -344,12 +345,10 @@ void DeviceEditor::buttonClicked(Button* button)
                 = CallOutBox::launchAsynchronously(std::unique_ptr<Component>(channelSelector),
                     button->getScreenBounds(),
                     nullptr);
-
-
-
         }
-   
-    }
+   */
+
+
     else if (button == auxButton && !acquisitionIsActive)
     {
         board->enableAuxs(button->getToggleState());
