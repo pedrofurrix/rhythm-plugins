@@ -284,19 +284,19 @@ void DeviceEditor::channelStateChanged(Array<int> newChannels)
     {
         selectedChannel = newChannels[0];
     }
+    
 
-
-    board->setDACchannel(int(activeAudioChannel), selectedChannel);
-
+    board->setDACchannel(electrode_on, selectedChannel); // Falta esta parte - commentamos o activeAudioChannel. A forma como podíamos fazer era guardar em variável e usar aqui.
+//Vou usar o electrode_on
     if (selectedChannel > -1)
     {
-        electrodeButtons[int(activeAudioChannel)]->setToggleState(true, dontSendNotification);
-        electrodeButtons[int(activeAudioChannel)]->setChannelNum(selectedChannel+1);
+        electrodeButtons[electrode_on]->setToggleState(true, dontSendNotification);
+        electrodeButtons[electrode_on]->setChannelNum(selectedChannel+1);
     }
     else
     {
-        electrodeButtons[int(activeAudioChannel)]->setChannelNum(selectedChannel);
-        electrodeButtons[int(activeAudioChannel)]->setToggleState(false, dontSendNotification);
+        electrodeButtons[electrode_on]->setChannelNum(selectedChannel);
+        electrodeButtons[electrode_on]->setToggleState(false, dontSendNotification);
     }
 
 
@@ -380,11 +380,11 @@ void DeviceEditor::buttonClicked(Button* button)
         for (int j=0; j<8; j++) {
             if (button == electrodeButtons[j]) {
                 std::vector<bool> channelStates;
-
-
+                global int electrode_on=j; //aqui seria para usar lá em cima, mas não sei como vai interagir para ligar os vários butões. Testar
                 for (int i = 0; i < board->getNumDataOutputs(ContinuousChannel::ELECTRODE); i++)
                 {
                 if (electrodeButtons[j]->getChannelNum() -1 == i)
+                    
                     channelStates.push_back(true);
                 else
                     channelStates.push_back(false);
