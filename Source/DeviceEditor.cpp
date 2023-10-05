@@ -39,6 +39,8 @@ inline double round(double x)
 #endif
 #endif
 
+int electrode_on=-1;
+
 DeviceEditor::DeviceEditor(GenericProcessor* parentNode,
                              DeviceThread* board_)
     : VisualizerEditor(parentNode, "tabText", 340), board(board_)
@@ -288,7 +290,7 @@ void DeviceEditor::channelStateChanged(Array<int> newChannels)
 
     board->setDACchannel(electrode_on, selectedChannel); // Falta esta parte - commentamos o activeAudioChannel. A forma como podíamos fazer era guardar em variável e usar aqui.
 //Vou usar o electrode_on
-    if (selectedChannel > -1)
+    if (selectedChannel > -1 && electrode_on > -1)
     {
         electrodeButtons[electrode_on]->setToggleState(true, dontSendNotification);
         electrodeButtons[electrode_on]->setChannelNum(selectedChannel+1);
@@ -380,7 +382,7 @@ void DeviceEditor::buttonClicked(Button* button)
         for (int j=0; j<8; j++) {
             if (button == electrodeButtons[j]) {
                 std::vector<bool> channelStates;
-                global int electrode_on=j; //aqui seria para usar lá em cima, mas não sei como vai interagir para ligar os vários butões. Testar
+                electrode_on=j; //aqui seria para usar lá em cima, mas não sei como vai interagir para ligar os vários butões. Testar
                 for (int i = 0; i < board->getNumDataOutputs(ContinuousChannel::ELECTRODE); i++)
                 {
                 if (electrodeButtons[j]->getChannelNum() -1 == i)
