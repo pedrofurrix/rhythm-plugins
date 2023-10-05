@@ -126,8 +126,8 @@ DeviceEditor::DeviceEditor(GenericProcessor* parentNode,
         }
         addAndMakeVisible(button);
         button->addListener(this);
-
-        if (i == 0)
+/*
+     if (i == 0)
         {
             button->setTooltip("Audio monitor left channel");
         }
@@ -135,6 +135,10 @@ DeviceEditor::DeviceEditor(GenericProcessor* parentNode,
         {
             button->setTooltip("Audio monitor right channel");
         }
+
+
+*/
+       
     }
 
    /* // add HW audio parameter selection - Removed this because I think it is not needed - also would overlap with the buttons I added.
@@ -311,33 +315,40 @@ void DeviceEditor::buttonClicked(Button* button)
         }
         CoreServices::updateSignalChain(this);
     }
-   
-    else if (button == electrodeButtons[0] || button == electrodeButtons[1])
-    {
-        std::vector<bool> channelStates;
+    for (int j=0; j<8; j++){
 
-        if (button == electrodeButtons[0])
-            activeAudioChannel = LEFT;
-        else
-            activeAudioChannel = RIGHT;
-
-        for (int i = 0; i < board->getNumDataOutputs(ContinuousChannel::ELECTRODE); i++)
+        else if (button == electrodeButtons[0] || button == electrodeButtons[1]||button == electrodeButtons[2] || button == electrodeButtons[3] || button == electrodeButtons[4] || button == electrodeButtons[5] || button == electrodeButtons[6] || button == electrodeButtons[7])
         {
-            if (electrodeButtons[int(activeAudioChannel)]->getChannelNum() -1 == i)
-                channelStates.push_back(true);
+            std::vector<bool> channelStates;
+
+        /* if (button == electrodeButtons[0])
+                activeAudioChannel = LEFT;
             else
-                channelStates.push_back(false);
+                activeAudioChannel = RIGHT;
+            */
+            
+            for (int i = 0; i < board->getNumDataOutputs(ContinuousChannel::ELECTRODE); i++)
+            {
+                if (electrodeButtons[int(]->getChannelNum() -1 == i)
+                    channelStates.push_back(true);
+                else
+                    channelStates.push_back(false);
+            }
+
+            auto* channelSelector = new PopupChannelSelector(this, channelStates);
+
+            channelSelector->setChannelButtonColour(Colour(0, 174, 239));
+            channelSelector->setMaximumSelectableChannels(1);
+
+            CallOutBox& myBox
+                = CallOutBox::launchAsynchronously(std::unique_ptr<Component>(channelSelector),
+                    button->getScreenBounds(),
+                    nullptr);
+
+
+
         }
-
-        auto* channelSelector = new PopupChannelSelector(this, channelStates);
-
-        channelSelector->setChannelButtonColour(Colour(0, 174, 239));
-        channelSelector->setMaximumSelectableChannels(1);
-
-        CallOutBox& myBox
-            = CallOutBox::launchAsynchronously(std::unique_ptr<Component>(channelSelector),
-                button->getScreenBounds(),
-                nullptr);
+   
     }
     else if (button == auxButton && !acquisitionIsActive)
     {
@@ -364,6 +375,39 @@ void DeviceEditor::buttonClicked(Button* button)
     else if (button == ledButton)
     {
         board->enableBoardLeds(button->getToggleState());
+    }
+    else 
+    {
+        for (int j=0; j<8; j++) {
+            if (button == electrodeButtons[j]) {
+                std::vector<bool> channelStates;
+
+
+                for (int i = 0; i < board->getNumDataOutputs(ContinuousChannel::ELECTRODE); i++)
+                {
+                if (electrodeButtons[j]->getChannelNum() -1 == i)
+                    channelStates.push_back(true);
+                else
+                    channelStates.push_back(false);
+                }
+
+            auto* channelSelector = new PopupChannelSelector(this, channelStates);
+
+            channelSelector->setChannelButtonColour(Colour(0, 174, 239));
+            channelSelector->setMaximumSelectableChannels(1);
+
+            CallOutBox& myBox
+                = CallOutBox::launchAsynchronously(std::unique_ptr<Component>(channelSelector),
+                    button->getScreenBounds(),
+                    nullptr);
+            }
+
+
+
+
+        }
+
+
     }
 
 }
