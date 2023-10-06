@@ -112,18 +112,17 @@ DeviceEditor::DeviceEditor(GenericProcessor* parentNode,
     {
         ElectrodeButton* button = new ElectrodeButton(-1);
         electrodeButtons.add(button);
-        int j=0;
-        if (i%2==0) {
-            button->setBounds(174, 35+j*10, 30, 10);
+
+        if (i<4){
+            button->setBounds(174+i*15, 35+j*10, 15, 10);
             button->setChannelNum(-1);
             button->setClickingTogglesState (false);
             button->setToggleState(false, dontSendNotification);
         } else {
-            button->setBounds(174+30, 35+j*10, 30, 10);
+            button->setBounds(204+(i-4)*15, 35+10, 15, 10);
             button->setChannelNum(-1);
             button->setClickingTogglesState (false);
             button->setToggleState(false, dontSendNotification);
-            j++;
         }
         addAndMakeVisible(button);
         button->addListener(this);
@@ -140,7 +139,7 @@ DeviceEditor::DeviceEditor(GenericProcessor* parentNode,
        
     }
 
-   /* // add HW audio parameter selection - Removed this because I think it is not needed - also would overlap with the buttons I added.
+   // add HW audio parameter selection - Removed this because I think it is not needed - also would overlap with the buttons I added.
     audioInterface = new AudioInterface(board, this);
     addAndMakeVisible(audioInterface);
     audioInterface->setBounds(174, 55, 70, 50);
@@ -148,7 +147,7 @@ DeviceEditor::DeviceEditor(GenericProcessor* parentNode,
     clockInterface = new ClockDivideInterface(board, this);
     addAndMakeVisible(clockInterface);
     clockInterface->setBounds(174, 80, 70, 50);
-*/
+    
     // add DSP Offset Button
     dspoffsetButton = new UtilityButton("DSP:", Font("Small Text", 13, Font::plain));
     dspoffsetButton->setRadius(3.0f); // sets the radius of the button's corners
