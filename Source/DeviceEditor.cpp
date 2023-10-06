@@ -127,8 +127,8 @@ DeviceEditor::DeviceEditor(GenericProcessor* parentNode,
         }
         addAndMakeVisible(button);
         button->addListener(this);
-/*
-     if (i == 0)
+
+         if (i == 0)
         {
             button->setTooltip("Audio monitor left channel");
         }
@@ -137,8 +137,6 @@ DeviceEditor::DeviceEditor(GenericProcessor* parentNode,
             button->setTooltip("Audio monitor right channel");
         }
 
-
-*/
        
     }
 
