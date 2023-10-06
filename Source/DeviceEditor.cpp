@@ -114,12 +114,12 @@ DeviceEditor::DeviceEditor(GenericProcessor* parentNode,
         electrodeButtons.add(button);
 
         if (i<4){
-            button->setBounds(174+i*15, 35+j*10, 15, 10);
+            button->setBounds(174+i*15, 35, 15, 10);
             button->setChannelNum(-1);
             button->setClickingTogglesState (false);
             button->setToggleState(false, dontSendNotification);
         } else {
-            button->setBounds(204+(i-4)*15, 35+10, 15, 10);
+            button->setBounds(174+(i-4)*15, 35+10, 15, 10);
             button->setChannelNum(-1);
             button->setClickingTogglesState (false);
             button->setToggleState(false, dontSendNotification);
