@@ -87,6 +87,12 @@ namespace RhythmNode
 		/** Called by PopupChannelSelector */
 		void channelStateChanged(Array<int> newChannels) override;
 
+		//Change button on to the value of the button that is on
+		void changeButtonOn(int number){
+
+			button_on=number;
+		}
+
 	private:
 
 		OwnedArray<HeadstageOptionsInterface> headstageOptionsInterfaces;
@@ -113,6 +119,7 @@ namespace RhythmNode
 
 		DeviceThread* board;
 		ChannelCanvas* canvas;
+		int button_on;
 
 		enum AudioChannel {
 			LEFT = 0,

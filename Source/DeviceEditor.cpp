@@ -39,7 +39,6 @@ inline double round(double x)
 #endif
 #endif
 
-int electrode_on=-1;
 
 DeviceEditor::DeviceEditor(GenericProcessor* parentNode,
                              DeviceThread* board_)
@@ -288,17 +287,17 @@ void DeviceEditor::channelStateChanged(Array<int> newChannels)
     }
     
 
-    board->setDACchannel(electrode_on, selectedChannel); // Falta esta parte - commentamos o activeAudioChannel. A forma como podíamos fazer era guardar em variável e usar aqui.
-//Vou usar o electrode_on
-    if (selectedChannel > -1 && electrode_on > -1)
+    board->setDACchannel(button_on, selectedChannel); // Falta esta parte - commentamos o activeAudioChannel. A forma como podíamos fazer era guardar em variável e usar aqui.
+//Vou usar o button_on
+    if (selectedChannel > -1 && button_on > -1)
     {
-        electrodeButtons[electrode_on]->setToggleState(true, dontSendNotification);
-        electrodeButtons[electrode_on]->setChannelNum(selectedChannel+1);
+        electrodeButtons[button_on]->setToggleState(true, dontSendNotification);
+        electrodeButtons[button_on]->setChannelNum(selectedChannel+1);
     }
     else
     {
-        electrodeButtons[electrode_on]->setChannelNum(selectedChannel);
-        electrodeButtons[electrode_on]->setToggleState(false, dontSendNotification);
+        electrodeButtons[button_on]->setChannelNum(selectedChannel);
+        electrodeButtons[button_on]->setToggleState(false, dontSendNotification);
     }
 
 
@@ -382,7 +381,7 @@ void DeviceEditor::buttonClicked(Button* button)
         for (int j=0; j<8; j++) {
             if (button == electrodeButtons[j]) {
                 std::vector<bool> channelStates;
-                electrode_on=j; //aqui seria para usar lá em cima, mas não sei como vai interagir para ligar os vários butões. Testar
+                changeButtonOn(j); //aqui seria para usar lá em cima, mas não sei como vai interagir para ligar os vários butões. Testar
                 for (int i = 0; i < board->getNumDataOutputs(ContinuousChannel::ELECTRODE); i++)
                 {
                 if (electrodeButtons[j]->getChannelNum() -1 == i)
