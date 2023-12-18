@@ -20,6 +20,17 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 */
+/*
+Code has been modified to provide direct access to 8 selectable channels via the AO board
+Solution developed by:
+Pedro Felix Alves (pedrofalves@i3s.up.pt)
+Paulo Aguiar
+Neuroengineering and Computational Neuroscience Lab
+i3S - Institute for Research and Innovation in Health
+University of Porto, Portugal
+contact email: pauloaguiar@i3s.up.pt
+*/
+
 
 #include "DeviceEditor.h"
 #include "DeviceThread.h"
